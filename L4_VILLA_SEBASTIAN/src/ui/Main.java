@@ -10,7 +10,7 @@ import model.Race;
 public class Main extends Application {
 
 	private RaceGUI raceGUI;
-	private static Race race;
+	private static  Race race;
 
 	public Main() {
 
