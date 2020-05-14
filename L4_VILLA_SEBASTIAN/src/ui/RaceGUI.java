@@ -6,6 +6,9 @@ import java.util.Date;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
+import javafx.application.Platform;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,9 +22,8 @@ import javafx.scene.shape.Circle;
 import model.Race;
 import thread.RaceThread;
 
-
 public class RaceGUI {
-
+	
 	@FXML
 	private BorderPane mainPanel;
 
@@ -71,13 +73,10 @@ public class RaceGUI {
 	private Label timeKeeper;
 
 	private Race main;
-	
+
 	private RaceThread AL;
 	private RaceThread LL;
 	private RaceThread ABB;
-	
-	
-	
 
 	public RaceGUI(Race race) {
 
@@ -86,6 +85,8 @@ public class RaceGUI {
 
 	@FXML
 	public void runRace(ActionEvent event) {
+		
+		
 		
 		String timeAl = "-1";
 		String timeLL = "-1";
@@ -107,8 +108,8 @@ public class RaceGUI {
 		LL.start();
 		ABB.start();
 		
-		
-		while(timeAl.equals("-1") && timeLL.equals("-1") && timeABB.equals("-1") )
+		int contador = 0;
+		while(timeAl.equals("-1") || timeLL.equals("-1") || timeABB.equals("-1") )
 		{
 			System.out.println("***************************");
 			System.out.println("Valida");
@@ -122,10 +123,20 @@ public class RaceGUI {
 				System.out.println(timeLL);
 				System.out.println(timeABB);
 				
+				long timeF= System.currentTimeMillis() - timeS;
+				SimpleDateFormat sdf = new SimpleDateFormat("mm:ss.SSS");
+				Date resultdate = new Date(timeF);
+				String timeFinal = sdf.format(resultdate);
+				timeKeeper.setText(timeFinal);
+				System.out.println("->"+timeKeeper.getText());
+				
+				
+				
 			}
 			catch(Exception e)
 			{
 				System.out.println(e.getMessage());
+				System.out.println("Ocurrio Exception");
 				break;
 			}
 		}
@@ -155,7 +166,5 @@ public class RaceGUI {
 		mainPanel.setCenter(setting);
 
 	}
-	
-	
 
 }

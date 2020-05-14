@@ -55,12 +55,14 @@ public class Race {
 	}
 
 	private boolean searchArrayListR(int index, long value) {
+		//System.out.println(index + " " + value);
 		if (index >= numberList.size()) {
 			return false;
 		} else if (numberList.get(index).getNumber() == value) {
 			return true;
 		}
-		return searchArrayListR(index + 1, value);
+		index += 1;
+		return searchArrayListR(index, value);
 	}
 
 	// Delete
@@ -75,7 +77,8 @@ public class Race {
 			numberList.remove(index);
 			return true;
 		}
-		return deleteArrayListR(index++, value);
+		index+=1;
+		return deleteArrayListR(index, value);
 	}
 
 	///////////// linkedList/////////////////////////
@@ -140,7 +143,7 @@ public class Race {
 	private NumberLL addLinkedListR(NumberLL current, long value) {
 		if (current == null) {
 			return new NumberLL(value);
-		} else {
+		} else if (current.getNextNumber()==null) {
 			current.setNextNumber(addLinkedListR(current.getNextNumber(), value));
 		}
 		return current;

@@ -35,7 +35,7 @@ public class RaceThread extends Thread {
 			Random rd = new Random(seed);
 			long start = 0;
 			long end =  0;
-			int i=0;
+			long i=0;
 	
 			switch(structure)
 			{
@@ -115,7 +115,7 @@ public class RaceThread extends Thread {
 									start = System.currentTimeMillis();
 									i = 0;
 									while (i < number) {
-										race.searchArrayListR(rd.nextLong());
+										race.deleteArrayListR(rd.nextLong());
 										i++;
 									}						
 									end = System.currentTimeMillis();
